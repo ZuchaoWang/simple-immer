@@ -25,7 +25,7 @@ function createDraft(parent, base, proxies) {
       }
       if (has(state.drafts, prop)) return state.drafts[prop]
       const value = state.base[prop]
-      if (!isDraft(state) && isDraftable(value)) {
+      if (/*!isDraft(state) &&*/ isDraftable(value)) { // state is a pure object, not a proxy/draft
         return (state.drafts[prop] = createDraft(state, value, proxies))
       }
       return value
